@@ -44,11 +44,11 @@ services:
       retries: 3
 
   # UI React
-  UI:
+  ui:
     build:
       context: ./UI
       dockerfile: Dockerfile
-    container_name: shopease-UI
+    container_name: shopease-ui
     ports:
       - "3000:80"
     depends_on:

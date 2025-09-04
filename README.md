@@ -7,7 +7,7 @@ Welcome to the Fullstack E-Commerce Shopping Project repository! This project is
 
 ## 🛠️ Technologies Being Used
 
-- **Frontend**: React.js, Redux, Tailwind CSS, Axios
+- **UI**: React.js, Redux, Tailwind CSS, Axios
 - **Backend**: Spring Boot, Spring Security, Spring Data JPA
 - **Database**: PostgreSQL
 - **Authentication**: JWT (JSON Web Tokens)
@@ -32,7 +32,7 @@ Completed
 
 ## ✅ To-Do List
 
-### Frontend
+### UI
 - [x] Set up React project structure
 - [x] Implement a Home Page with different sections and a Footer
 - [X] Create Mockup API Data (Content)

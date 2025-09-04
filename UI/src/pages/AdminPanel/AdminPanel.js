@@ -18,7 +18,7 @@ const httpClient = (url,options={})=>{
   return fetchUtils.fetchJson(url,options);
 }
 
-const dataProvider = withLifecycleCallbacks(simpleRestProvider('http://localhost:8080/api',httpClient),[
+const dataProvider = withLifecycleCallbacks(simpleRestProvider('http://13.220.100.45:8080/api',httpClient),[
   {
     resource:"products",
     beforeSave: async (params,dataProvider) =>{

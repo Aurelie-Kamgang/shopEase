@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  # Base de données
+  database:
+    image: mysql:8.0
+    container_name: shopease-db
+    environment:
+      MYSQL_DATABASE: shopease
+      MYSQL_USER: shopease
+      MYSQL_PASSWORD: shopease123
+      MYSQL_ROOT_PASSWORD: root123
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - shopease-network
+    restart: unless-stopped
+
+  # Backend Spring Boot
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: shopease-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/shopease
+      SPRING_DATASOURCE_USERNAME: shopease
+      SPRING_DATASOURCE_PASSWORD: shopease123
+      SERVER_PORT: 8080
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
+    networks:
+      - shopease-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://13.220.100.45:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: shopease-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    networks:
+      - shopease-network
+    restart: unless-stopped
+
+volumes:
+  db_data:
+
+networks:
+  shopease-network:
+    driver: bridge

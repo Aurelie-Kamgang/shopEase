@@ -45,7 +45,7 @@ services:
     restart: unless-stopped
     healthcheck:
       # utilise wget, souvent présent; sinon installe curl dans ton Dockerfile backend
-      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/actuator/health | grep -q UP"]
+      test: ["CMD-SHELL", "wget -qO- http://52.20.228.67:8080/actuator/health | grep -q UP"]
       interval: 30s
       timeout: 10s
       retries: 3
